@@ -34,7 +34,7 @@ const addToCart = () => {
                           <p>Fall Limited Edition Sneakers</p>
                           <p>$125 x <span class="number">${Number(
                             totalItem
-                          )}</span> <span class="total">${totalAmount}</span></p>
+                          )}</span>  &nbsp; <span class="total">$${totalAmount}.00</span></p>
                       </div>
   
                       <div class="delete">

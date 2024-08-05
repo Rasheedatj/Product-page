@@ -294,12 +294,20 @@ button {
   background-color: var(--Light-grayish-blue);
 }
 
+.number img:hover {
+  opacity: 0.7;
+}
+
 .cart {
   justify-content: center;
   gap: 10px;
   background-color: var(--Orange);
   color: var(--Very-dark-blue);
   transition: opacity 200ms linear;
+}
+
+.cart img {
+  width: 18px;
 }
 
 .cart:hover {
