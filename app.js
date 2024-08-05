@@ -13,14 +13,20 @@ const closeMenu = () => {
   document.querySelector('body').classList.remove('active');
 };
 
-const openCart = () => cartModal.classList.toggle('active');
+const openCart = () => {
+  if (cartModal.classList.contains('active')) {
+    cartModal.classList.remove('active');
+  } else {
+    cartModal.classList.add('active');
+  }
+};
 
 const addToCart = () => {
   const section = document.querySelector('.cart-modal section');
 
   if (totalItem > 0) {
     // open cart
-    cartModal.classList.add('active');
+    openCart();
     // calculte total amount
     const totalAmount = +totalItem * 125;
     // show number of items on icon
@@ -44,9 +50,10 @@ const addToCart = () => {
                   </div>
   
                   
-                  <button class="cart">
+                  <button class="checkout">
                       <p>Checkout</p>
                   </button>`;
+    document.querySelector('.checkout').addEventListener('click', openCart);
   } else {
     alert('Select an item');
   }

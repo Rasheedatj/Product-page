@@ -298,7 +298,8 @@ button {
   opacity: 0.7;
 }
 
-.cart {
+.cart,
+.checkout {
   justify-content: center;
   gap: 10px;
   background-color: var(--Orange);
