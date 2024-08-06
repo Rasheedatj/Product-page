@@ -2,6 +2,18 @@ const totalItemEl = document.querySelector('.total-item');
 let totalItem = totalItemEl.innerText;
 const cartModal = document.querySelector('.cart-modal');
 const cartItemNumber = document.querySelector('.item-number');
+const thumbImages = document.querySelectorAll('.thumbnail  img');
+const galleryModal = document.querySelector('.gallery');
+
+let activeThumbnail = document.querySelector('.thumbnail .active');
+let page = 0;
+
+const images = {
+  product1: './images/image-product-1.jpg',
+  product2: './images/image-product-2.jpg',
+  product3: './images/image-product-3.jpg',
+  product4: './images/image-product-4.jpg',
+};
 
 const openMenu = () => {
   document.querySelector('body').classList.add('active');
@@ -53,7 +65,11 @@ const addToCart = () => {
                   <button class="checkout">
                       <p>Checkout</p>
                   </button>`;
-    document.querySelector('.checkout').addEventListener('click', openCart);
+
+    document.querySelector('.checkout').addEventListener('click', () => {
+      openCart();
+      cartItemNumber.classList.remove('active');
+    });
   } else {
     alert('Select an item');
   }
@@ -73,8 +89,51 @@ const cartItems = (e) => {
   }
 };
 
+const openGallery = () => {
+  page = 0;
+  if (galleryModal.classList.contains('active')) {
+    galleryModal.classList.remove('active');
+    document.querySelector('body').classList.remove('active');
+  } else {
+    document.querySelector('body').classList.add('active');
+    galleryModal.classList.add('active');
+  }
+};
+
+const pagination = (e) => {
+  if (e.target.classList.contains('jpg')) openGallery();
+  thumbImages.forEach((image) => image.classList.remove('active'));
+  e.target.classList.add('active');
+  g(e.target.src);
+};
+
+const g = (active) => {
+  activeThumbnail = active;
+  document.querySelector('.image img').src = activeThumbnail;
+};
+
+const next = () => {
+  if (page >= 3) return;
+  page++;
+  const imageKey = `product${page + 1}`;
+  g(images[imageKey]);
+};
+
+const previous = () => {
+  if (page <= 0) return;
+  page--;
+
+  const imageKey = `product${page + 1}`;
+  g(images[imageKey]);
+};
+
 document.querySelector('.close').addEventListener('click', closeMenu);
 document.querySelector('.menu-icon').addEventListener('click', openMenu);
 document.querySelector('.cart-icon').addEventListener('click', openCart);
 document.querySelector('.cart').addEventListener('click', addToCart);
 document.querySelector('.number').addEventListener('click', cartItems);
+document.querySelector('.thumbnail').addEventListener('click', pagination);
+document.querySelector('.close-modal').addEventListener('click', openGallery);
+
+document.querySelector('.next').addEventListener('click', next);
+document.querySelector('.previous').addEventListener('click', previous);
